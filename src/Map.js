@@ -1,5 +1,5 @@
-import React, { useEffect, useState, useLayoutEffect } from "react";
-import useFetch from "./hooks/fetchhook";
+import React, { useEffect, useState, useLayoutEffect, useContext } from "react";
+import { CountriesContext } from "./App";
 
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
@@ -7,8 +7,7 @@ import style from "./styles/Map.module.css";
 
 export default function Map() {
   const [myMap, setMymap] = useState(null);
-  const { loading, data, error } = useFetch();
-  // console.log(data);
+  const { data } = useContext(CountriesContext);
 
   const myIcon = L.icon({
     iconUrl: "/map-icon.png",
@@ -36,7 +35,9 @@ export default function Map() {
   }, [myMap]);
 
   useLayoutEffect(() => {
-    if (!loading && !error) {
+    console.log(L.marker);
+
+    if (myMap) {
       data.map((country) => {
         L.marker([country.lat, country.lon], { icon: myIcon })
           .addTo(myMap)
@@ -56,7 +57,7 @@ export default function Map() {
           .openPopup();
       });
     }
-  }, [loading]);
+  }, [data, myIcon, myMap]);
 
   useEffect(() => {
     if (!myMap) {

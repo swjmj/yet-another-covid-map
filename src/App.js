@@ -18,7 +18,7 @@ function App() {
   if (error) return <p>{JSON.stringify(error, null, 2)}</p>;
 
   return (
-    <CountriesContext.Provider value={data}>
+    <CountriesContext.Provider value={{ loading, data, error }}>
       <div className="App" id="App">
         <div id="header">
           <Header />
