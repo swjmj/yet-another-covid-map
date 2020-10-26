@@ -1,0 +1,33 @@
+.info_container {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  height: 100%;
+
+  background-color: rgb(37, 37, 37);
+  color: white;
+}
+.header {
+  height: 20%;
+}
+
+.table {
+  height: 80%;
+  width: 95%;
+  overflow: scroll;
+  overflow-x: hidden;
+}
+
+.values {
+  width: 100%;
+  height: fit-content;
+  padding: 20px;
+  list-style: none;
+  -webkit-border-radius: 40px 40px 40px 40px;
+  -moz-border-radius: 40px 40px 40px 40px;
+  border-radius: 40px 40px 40px 40px;
+
+  -webkit-box-shadow: inset 0px 0px 15px -5px #2a56ff;
+  box-shadow: inset 0px 0px 15px -5px #2a56ff;
+}
