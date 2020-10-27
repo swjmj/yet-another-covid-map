@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useLayoutEffect, useContext } from "react";
-import { CountriesContext } from "./App";
+import { DataContext } from "./DataProvider";
 
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
@@ -7,7 +7,7 @@ import style from "./styles/Map.module.css";
 
 export default function Map() {
   const [myMap, setMymap] = useState(null);
-  const { data } = useContext(CountriesContext);
+  const { data } = useContext(DataContext);
 
   const myIcon = L.icon({
     iconUrl: "/map-icon.png",

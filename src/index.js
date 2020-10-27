@@ -1,12 +1,16 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import DataProvider from "./DataProvider";
+
 import App from "./App";
 import "./styles/normalize.css";
 import * as serviceWorker from "./serviceWorker";
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <DataProvider>
+      <App />
+    </DataProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );

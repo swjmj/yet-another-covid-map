@@ -1,5 +1,4 @@
-import React, { createContext } from "react";
-import useFetch from "./hooks/fetchhook";
+import React from "react";
 
 import Header from "./Header";
 import Map from "./Map";
@@ -9,31 +8,22 @@ import "./styles/App.css";
 
 // TODO Add a context component with the fetch state
 
-export const CountriesContext = createContext();
-
 function App() {
-  const { loading, data, error } = useFetch();
-
-  if (loading) return <h1>Loading...</h1>;
-  if (error) return <p>{JSON.stringify(error, null, 2)}</p>;
-
   return (
-    <CountriesContext.Provider value={{ loading, data, error }}>
-      <div className="App" id="App">
-        <div id="header">
-          <Header />
-        </div>
-        <div id="map">
-          <Map />
-        </div>
-        <div id="info">
-          <Info />
-        </div>
-        <div id="plot">
-          <Plots />
-        </div>
+    <div className="App" id="App">
+      <div id="header">
+        <Header />
       </div>
-    </CountriesContext.Provider>
+      <div id="map">
+        <Map />
+      </div>
+      <div id="info">
+        <Info />
+      </div>
+      <div id="plot">
+        <Plots />
+      </div>
+    </div>
   );
 }
 
