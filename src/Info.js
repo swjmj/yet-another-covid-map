@@ -1,56 +1,93 @@
-import React, { useState, useEffect } from "react";
-import { SortDeaths, SortMortality, SortCases } from "./SortButtons";
+import React, { useContext } from "react";
+import { DataContext } from "./DataProvider";
+
+import {
+  SortDeaths,
+  SortMortality,
+  SortCases,
+  ReverseSort,
+} from "./SortButtons";
+
 import styles from "./styles/Info.module.css";
-import useFetch from "./hooks/fetchhook";
 
 export default function Info() {
-  const { loading, data, error } = useFetch();
+  const {
+    covidData,
+    markerClick,
+    sortDeaths,
+    sortCases,
+    sortMortality,
+    reverse,
+    reverseSort,
+  } = useContext(DataContext);
 
-  const [covidData, setCovidData] = useState();
+  // if (loading) return <h1>Loading...</h1>;
+  // if (error) return <p>{JSON.stringify(error, null, 2)}</p>;
 
-  const sortDeaths = () => {
-    covidData.sort(
-      (country1, country2) => country2.TotalDeaths - country1.TotalDeaths
-    );
-    setCovidData([...covidData]);
-  };
+  // const [reverse, setReverse] = useState(false);
 
-  const sortCases = () => {
-    covidData.sort(
-      (country1, country2) => country2.TotalConfirmed - country1.TotalConfirmed
-    );
-    setCovidData([...covidData]);
-  };
+  // const [covidData, setCovidData] = useState(data);
 
-  const sortMortality = () => {
-    covidData.sort(
-      (country1, country2) =>
-        country2.TotalDeaths / country2.TotalConfirmed -
-        country1.TotalDeaths / country1.TotalConfirmed
-    );
-    setCovidData([...covidData]);
-  };
+  // const sortDeaths = () => {
+  //   if (reverse) {
+  //     covidData.sort(
+  //       (country1, country2) => country1.TotalDeaths - country2.TotalDeaths
+  //     );
+  //   } else {
+  //     covidData.sort(
+  //       (country1, country2) => country2.TotalDeaths - country1.TotalDeaths
+  //     );
+  //   }
+  //   setCovidData([...covidData]);
+  // };
 
-  useEffect(() => {
-    setCovidData(data);
-  }, [loading, data]);
+  // const sortCases = () => {
+  //   if (reverse) {
+  //     covidData.sort(
+  //       (country1, country2) =>
+  //         country1.TotalConfirmed - country2.TotalConfirmed
+  //     );
+  //   } else {
+  //     covidData.sort(
+  //       (country1, country2) =>
+  //         country2.TotalConfirmed - country1.TotalConfirmed
+  //     );
+  //   }
+  //   setCovidData([...covidData]);
+  // };
 
-  if (loading || !covidData) return <h1>Loading...</h1>;
-  if (error) return <p>{JSON.stringify(error, null, 2)}</p>;
+  // const sortMortality = () => {
+  //   if (reverse) {
+  //     covidData.sort(
+  //       (country1, country2) =>
+  //         country1.TotalDeaths / country1.TotalConfirmed -
+  //         country2.TotalDeaths / country2.TotalConfirmed
+  //     );
+  //   } else {
+  //     covidData.sort(
+  //       (country1, country2) =>
+  //         country2.TotalDeaths / country2.TotalConfirmed -
+  //         country1.TotalDeaths / country1.TotalConfirmed
+  //     );
+  //   }
+
+  //   setCovidData([...covidData]);
+  // };
 
   return (
     <div className={styles.info_container}>
-      {/* TODO Here goes the button component to sort the list */}
       <SortDeaths onSortDeaths={sortDeaths} />
       <SortMortality onSortMortality={sortMortality} />
       <SortCases onSortCases={sortCases} />
+      <ReverseSort reverse={reverse} onReverseSort={reverseSort} />
 
       <hr />
       <div className={styles.table}>
         {covidData.map((country) => (
           <ul
-            key={country.TotalDeaths + country.TotalConfirmed}
+            key={country.Country}
             className={styles.values}
+            onClick={() => markerClick(country.Country)}
           >
             <li>Country: {country.Country}</li>
             <li>Total Confirmed: {country.TotalConfirmed}</li>

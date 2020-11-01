@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useContext } from "react";
+import { DataContext } from "./DataProvider";
 
 import Header from "./Header";
 import Map from "./Map";
@@ -6,9 +7,14 @@ import Info from "./Info";
 import Plots from "./Plots";
 import "./styles/App.css";
 
-// TODO Add a context component with the fetch state
+// TODO comment everything...the thing in the provider is kind of confusing
 
 function App() {
+  const { loadingAll, errorAll } = useContext(DataContext);
+
+  if (loadingAll) return <h1>Loading...</h1>;
+  if (errorAll) return <p>{JSON.stringify(errorAll, null, 2)}</p>;
+
   return (
     <div className="App" id="App">
       <div id="header">

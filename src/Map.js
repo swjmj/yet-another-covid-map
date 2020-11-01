@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useLayoutEffect, useContext } from "react";
 import { DataContext } from "./DataProvider";
+import useSize from "./hooks/useSize";
 
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
@@ -7,7 +8,8 @@ import style from "./styles/Map.module.css";
 
 export default function Map() {
   const [myMap, setMymap] = useState(null);
-  const { data } = useContext(DataContext);
+  const { dataAll, markerPopup } = useContext(DataContext);
+  const [myRef, width, height] = useSize();
 
   const myIcon = L.icon({
     iconUrl: "/map-icon.png",
@@ -35,37 +37,54 @@ export default function Map() {
   }, [myMap]);
 
   useLayoutEffect(() => {
-    console.log(L.marker);
-
     if (myMap) {
-      data.map((country) => {
-        L.marker([country.lat, country.lon], { icon: myIcon })
-          .addTo(myMap)
-          .bindPopup(
-            `Country: ${country.Country} <br /> Cases: ${
-              country.TotalConfirmed
-            } <br /> Deaths: ${country.TotalDeaths} <br /> Mortality: ${
-              chopNumbers(country.TotalDeaths / country.TotalConfirmed) * 100
-            }%  <br/> Total Recovered: ${
-              country.TotalRecovered
-            } <br/> New Confirmed: ${country.NewConfirmed} <br/> New Deaths: ${
-              country.NewDeaths
-            } <br/> New Recovered: ${country.NewRecovered} <br/> Last Update: ${
-              country.Date
-            }`
-          )
-          .openPopup();
+      dataAll.map((country) => {
+        if (country.Country === markerPopup) {
+          L.marker([country.lat, country.lon], { icon: myIcon })
+            .addTo(myMap)
+            .bindPopup(
+              `Country: ${country.Country} <br /> Cases: ${
+                country.TotalConfirmed
+              } <br /> Deaths: ${country.TotalDeaths} <br /> Mortality: ${
+                chopNumbers(country.TotalDeaths / country.TotalConfirmed) * 100
+              }%  <br/> Total Recovered: ${
+                country.TotalRecovered
+              } <br/> New Confirmed: ${
+                country.NewConfirmed
+              } <br/> New Deaths: ${country.NewDeaths} <br/> New Recovered: ${
+                country.NewRecovered
+              } <br/> Last Update: ${country.Date}`
+            )
+            .openPopup();
+        } else {
+          L.marker([country.lat, country.lon], { icon: myIcon })
+            .addTo(myMap)
+            .bindPopup(
+              `Country: ${country.Country} <br /> Cases: ${
+                country.TotalConfirmed
+              } <br /> Deaths: ${country.TotalDeaths} <br /> Mortality: ${
+                chopNumbers(country.TotalDeaths / country.TotalConfirmed) * 100
+              }%  <br/> Total Recovered: ${
+                country.TotalRecovered
+              } <br/> New Confirmed: ${
+                country.NewConfirmed
+              } <br/> New Deaths: ${country.NewDeaths} <br/> New Recovered: ${
+                country.NewRecovered
+              } <br/> Last Update: ${country.Date}`
+            );
+        }
+        // .openPopup();
       });
     }
-  }, [data, myIcon, myMap]);
+  }, [myMap, markerPopup]);
 
   useEffect(() => {
     if (!myMap) {
-      setMymap(L.map("mapDiv").setView([27.052953, -29.257165, 0.0], 2.5));
+      setMymap(L.map("mapDiv").setView([29.052953, 0, 0.0], 2.5));
     }
   }, [myMap]);
 
-  return <div id="mapDiv" className={style.map}></div>;
+  return <div id="mapDiv" className={style.map} ref={myRef}></div>;
 }
 
 function chopNumbers(number) {
