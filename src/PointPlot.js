@@ -7,7 +7,9 @@ const CanvasJS = CanvasJSReact.CanvasJS;
 const CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
 export default function PointPlot() {
-  const { loadingMex, covidDataMx, errorMex } = useContext(DataContext);
+  const { loadingMex, covidDataMx, errorMex, markerPopup } = useContext(
+    DataContext
+  );
 
   if (loadingMex) return <h2>Loading...</h2>;
   if (errorMex) return <p>{JSON.stringify(errorMex, null, 2)}</p>;
@@ -16,15 +18,32 @@ export default function PointPlot() {
     zoomEnabled: true,
     animationEnabled: true,
     title: {
-      text: "Total Cases",
+      text: `Total Cases - Deaths - ${markerPopup}`,
     },
     theme: "dark1",
+    axisX: {
+      valueFormatString: "D/M/YYYY",
+      crosshair: {
+        enabled: true,
+        snapToDataPoint: true,
+      },
+    },
+    axisY: {
+      valueFormatString: "##",
+      crosshair: {
+        enabled: true,
+        snapToDataPoint: true,
+        labelFormatter: function (e) {
+          return CanvasJS.formatNumber(e.value, "##");
+        },
+      },
+    },
 
     data: [
       {
         type: "spline",
         yValueFormatString: "#",
-        xValueFormatString: "D M YYYY",
+        xValueFormatString: "D/M/YYYY",
         dataPoints: covidDataMx.map((country, i) => ({
           x: new Date(country.Date),
           y: country.Confirmed,
@@ -33,7 +52,7 @@ export default function PointPlot() {
       {
         type: "spline",
         yValueFormatString: "#",
-        xValueFormatString: "D M YYYY",
+        xValueFormatString: "D/M/YYYY",
         dataPoints: covidDataMx.map((country, i) => ({
           x: new Date(country.Date),
           y: country.Deaths,

@@ -23,7 +23,7 @@ export default function BarPlot() {
     animationEnabled: true,
     theme: "dark1",
     title: {
-      text: `Covid-19 World  sorted ${dataSorted} `,
+      text: `Covid-19 World  Sorted ${dataSorted} `,
     },
     axisX: {
       title: "Country",

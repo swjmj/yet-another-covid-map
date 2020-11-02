@@ -5,7 +5,7 @@
   overflow: hidden;
   height: 100%;
 
-  background-color: rgb(37, 37, 37);
+  background-color: rgb(42, 42, 42);
   color: white;
 }
 .header {
@@ -17,6 +17,7 @@
   width: 95%;
   overflow: scroll;
   overflow-x: hidden;
+  padding: 10px;
 }
 
 .values {
@@ -31,4 +32,8 @@
   -webkit-box-shadow: inset 0px 0px 15px -5px #2a56ff;
   box-shadow: inset 0px 0px 15px -5px #2a56ff;
   cursor: pointer;
+}
+
+.values:hover {
+  background-color: rgb(61, 61, 61);
 }

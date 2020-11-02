@@ -9,13 +9,13 @@ export default function DataProvider({ children }) {
     true
   ); //fetch al the summary information for all the countries
 
+  // TODO how to change the fetch each time a country is selected?
+  const [markerPopup, setMarkerPopup] = useState("us");
+
   const { loading: loadingMex, data: dataMex, error: errorMex } = useFetch(
-    `https://api.covid19api.com/total/country/us`,
+    `https://api.covid19api.com/total/country/${markerPopup}`,
     false
   ); // fetch all information for one country
-
-  // TODO how to change the fetch each time a country is selected?
-  const [markerPopup, setMarkerPopup] = useState(null);
 
   const [reverse, setReverse] = useState(false);
 
