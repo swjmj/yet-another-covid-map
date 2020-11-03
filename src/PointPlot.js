@@ -41,7 +41,7 @@ export default function PointPlot() {
 
     data: [
       {
-        type: "spline",
+        type: "line",
         yValueFormatString: "#",
         xValueFormatString: "D/M/YYYY",
         dataPoints: covidDataMx.map((country, i) => ({
@@ -50,7 +50,7 @@ export default function PointPlot() {
         })),
       },
       {
-        type: "spline",
+        type: "line",
         yValueFormatString: "#",
         xValueFormatString: "D/M/YYYY",
         dataPoints: covidDataMx.map((country, i) => ({
@@ -59,7 +59,6 @@ export default function PointPlot() {
         })),
       },
     ],
-    // random data
   };
 
   return (

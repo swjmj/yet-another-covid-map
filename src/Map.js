@@ -8,7 +8,7 @@ import style from "./styles/Map.module.css";
 
 export default function Map() {
   const [myMap, setMymap] = useState(null);
-  const { dataAll, markerPopup } = useContext(DataContext);
+  const { dataAll, markerPopup, markerClick } = useContext(DataContext);
   const [myRef, width, height] = useSize();
 
   const myIcon = L.icon({
@@ -17,6 +17,8 @@ export default function Map() {
     iconAnchor: [15, 30],
     popupAnchor: [-3, -20],
   });
+
+  const onClick = (e) => markerClick(e.target.options.customId);
 
   useLayoutEffect(() => {
     if (myMap) {
@@ -40,7 +42,10 @@ export default function Map() {
     if (myMap) {
       dataAll.map((country) => {
         if (country.Country === markerPopup) {
-          L.marker([country.lat, country.lon], { icon: myIcon })
+          L.marker([country.lat, country.lon], {
+            customId: `${country.Country}`,
+            icon: myIcon,
+          })
             .addTo(myMap)
             .bindPopup(
               `Country: ${country.Country} <br /> Cases: ${
@@ -55,9 +60,13 @@ export default function Map() {
                 country.NewRecovered
               } <br/> Last Update: ${country.Date}`
             )
+            .on("click", onClick)
             .openPopup();
         } else {
-          L.marker([country.lat, country.lon], { icon: myIcon })
+          L.marker([country.lat, country.lon], {
+            customId: `${country.Country}`,
+            icon: myIcon,
+          })
             .addTo(myMap)
             .bindPopup(
               `Country: ${country.Country} <br /> Cases: ${
@@ -71,9 +80,9 @@ export default function Map() {
               } <br/> New Deaths: ${country.NewDeaths} <br/> New Recovered: ${
                 country.NewRecovered
               } <br/> Last Update: ${country.Date}`
-            );
+            )
+            .on("click", onClick);
         }
-        // .openPopup();
       });
     }
   }, [myMap, markerPopup]);
