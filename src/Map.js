@@ -1,6 +1,7 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable array-callback-return */
 import React, { useEffect, useState, useLayoutEffect, useContext } from "react";
 import { DataContext } from "./DataProvider";
-import useSize from "./hooks/useSize";
 
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
