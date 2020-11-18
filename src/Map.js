@@ -9,7 +9,6 @@ import style from "./styles/Map.module.css";
 export default function Map() {
   const [myMap, setMymap] = useState(null);
   const { dataAll, markerPopup, markerClick } = useContext(DataContext);
-  const [myRef, width, height] = useSize();
 
   const myIcon = L.icon({
     iconUrl: "/map-icon.png",
@@ -93,7 +92,7 @@ export default function Map() {
     }
   }, [myMap]);
 
-  return <div id="mapDiv" className={style.map} ref={myRef}></div>;
+  return <div id="mapDiv" className={style.map}></div>;
 }
 
 function chopNumbers(number) {
