@@ -1,7 +1,17 @@
 .container {
   background-color: rgb(37, 37, 37);
-  height: 50px;
+  /* height: 100px; */
   color: white;
-  padding: 10px;
+  padding: 5px;
   font-size: 30px;
+}
+.name {
+  color: gray;
+  padding-left: 10px;
+}
+
+@media (max-width: 700px) {
+  .container {
+    font-size: 25px;
+  }
 }

@@ -13,7 +13,7 @@ body {
   display: grid;
   gap: 5px;
   grid-template-columns: repeat(2, 1fr) 350px;
-  grid-template-rows: 50px 60vh auto;
+  grid-template-rows: 65px 60vh auto;
   grid-template-areas:
     "header header header"
     "map map info"
@@ -45,7 +45,7 @@ body {
     height: 100%;
   }
   #header {
-    height: 50px;
+    height: 65px;
   }
   #map {
     height: 400px;

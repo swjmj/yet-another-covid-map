@@ -18,8 +18,9 @@ export default function Map() {
     popupAnchor: [-3, -20],
   });
 
-  const onClick = (e) => markerClick(e.target.options.customId);
+  const onClick = (e) => markerClick(e.target.options.customId); //returns the ID of the clicked marker
 
+  //in this hook I set up the map and tile options. Also call openstreetmap
   useLayoutEffect(() => {
     if (myMap) {
       L.tileLayer(
@@ -38,6 +39,8 @@ export default function Map() {
     }
   }, [myMap]);
 
+  //here I set up the markers, markers options, markers popup info, bind the markers to an click action
+  //Note the if else, they allow to  open the popup of the country that has been selected on the right panel
   useLayoutEffect(() => {
     if (myMap) {
       dataAll.map((country) => {
@@ -87,6 +90,7 @@ export default function Map() {
     }
   }, [myMap, markerPopup]);
 
+  //initialization of the map and bind it to div with id="mapDiv"
   useEffect(() => {
     if (!myMap) {
       setMymap(L.map("mapDiv").setView([29.052953, 0, 0.0], 2.5));
