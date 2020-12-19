@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { DataContext } from "./DataProvider";
 
+import Instructions from "./Instructions";
 import Header from "./Header";
 import Map from "./Map";
 import Info from "./Info";
@@ -17,6 +18,7 @@ function App() {
 
   return (
     <div className="App" id="App">
+      <Instructions />
       <div id="header">
         <Header />
       </div>

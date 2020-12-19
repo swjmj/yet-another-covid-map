@@ -10,7 +10,7 @@ export default function useSize() {
       setWidth(myRef.current.clientWidth);
       setHeight(myRef.current.clientHeight);
     }
-  });
+  }, [myRef]);
 
   return [myRef, width, height];
 }
