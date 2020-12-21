@@ -15,7 +15,7 @@ export default function Header() {
           Angelo Martínez
         </a>{" "}
       </div>
-      <div>
+      <div className={styles.name}>
         Covid data source{" "}
         <a
           href="https://covid19api.com/"
