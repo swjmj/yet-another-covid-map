@@ -6,15 +6,43 @@ import inst_4 from "./IMG/covid_map_instructionsArtboard-4.png";
 
 import style from "./styles/Instructions.module.css";
 
-export default function Instructions() {
+export default function PopSideBar() {
   const [content, setContent] = useState(false);
   const myRef = useRef(false);
   const buttonRef = useRef();
 
+  const style_background = {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    zIndex: 1500,
+    width: "100%",
+    height: "100%",
+    backgroundColor: "rgba(41, 41, 41, 0.39)",
+  };
+
+  const infoDiv = (
+    <>
+      <div className={{ style_background }}></div>
+      <div className={style.popup} ref={myRef}>
+        <img src={inst_1} alt="Instruction" className={style.inst_image} />
+
+        <img src={inst_2} alt="Instruction" className={style.inst_image} />
+
+        <img src={inst_3} alt="Instruction" className={style.inst_image} />
+
+        <img src={inst_4} alt="Instruction" className={style.inst_image} />
+      </div>
+    </>
+  );
+
   const handleClick = (e) => {
-    e.preventDefault();
     setContent(!content);
   };
+
+  const styleObjPanel = {};
+
+  const styleObjButton = {};
 
   const handleMouseClick = (e) => {
     if (!myRef.current) return;
@@ -34,28 +62,17 @@ export default function Instructions() {
     };
   }, []);
 
-  const infoDiv = (
-    <div className={style.popup} ref={myRef}>
-      <img src={inst_1} alt="Instruction" className={style.inst_image} />
-
-      <img src={inst_2} alt="Instruction" className={style.inst_image} />
-
-      <img src={inst_3} alt="Instruction" className={style.inst_image} />
-
-      <img src={inst_4} alt="Instruction" className={style.inst_image} />
-    </div>
-  );
-
   return (
     <>
       <button
         onClick={handleClick}
         className={style.button}
-        id="instructions_button"
+        id="panel_button"
         ref={buttonRef}
       >
         Map Info
       </button>
+
       <div>{content && infoDiv}</div>
     </>
   );
