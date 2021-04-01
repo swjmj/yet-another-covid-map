@@ -7,7 +7,7 @@ export default function DataProvider({ children }) {
   const { loading: loadingAll, data: dataAll, error: errorAll } = useFetch(
     "https://api.covid19api.com/summary",
     true
-  ); //fetch al the summary information for all the countries
+  ); //fetch all the summary information for all the countries
 
   // TODO how to change the fetch each time a country is selected?
   const [markerPopup, setMarkerPopup] = useState("us");
