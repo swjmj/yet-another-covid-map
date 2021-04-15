@@ -90,23 +90,32 @@ export default function Map() {
           })
             .addTo(myMap)
             .bindPopup(
-              `Country: ${country.Country} <br /> Cases: ${numeral(
-                country.TotalConfirmed
-              ).format("0,0")} <br /> Deaths: ${numeral(
+              `<div class="popupMap" style="display:flex; flex-direction: column; font-size:12px;  ">
+              <div class="popupMap">Country: ${country.Country}</div> 
+               <div class="popupMap"> Cases: ${numeral(
+                 country.TotalConfirmed
+               ).format("0,0")} </div> 
+              <div class="popupMap"> Deaths: ${numeral(
                 country.TotalDeaths
-              ).format("0,0")} <br /> Mortality: ${numeral(
+              ).format("0,0")}</div>  
+              <div class="popupMap"> Mortality: ${numeral(
                 chopNumbers(country.TotalDeaths / country.TotalConfirmed) * 100
-              ).format("0,0.00")}%  <br/> Total Recovered: ${numeral(
+              ).format("0,0.00")}% </div> 
+              <div class="popupMap"> Total Recovered: ${numeral(
                 country.TotalRecovered
-              ).format("0,0")} <br/> New Confirmed: ${numeral(
+              ).format("0,0")} </div> 
+              <div class="popupMap"> New Confirmed: ${numeral(
                 country.NewConfirmed
-              ).format("0,0")} <br/> New Deaths: ${numeral(
+              ).format("0,0")}</div> 
+              <div class="popupMap"> New Deaths: ${numeral(
                 country.NewDeaths
-              ).format("0,0")} <br/> New Recovered: ${numeral(
+              ).format("0,0")} </div> 
+              <div class="popupMap"> New Recovered: ${numeral(
                 country.NewRecovered
-              ).format("0,0")} <br/> Last Update: ${DateTime.fromISO(
+              ).format("0,0")}</div> 
+              <div class="popupMap"> Last Update: ${DateTime.fromISO(
                 country.Date
-              ).toLocaleString(DateTime.DATETIME_MED)}`
+              ).toLocaleString(DateTime.DATETIME_MED)}</div> </div>`
             )
             .on("click", onClick);
         }
