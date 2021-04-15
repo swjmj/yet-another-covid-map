@@ -3,6 +3,9 @@
 import React, { useEffect, useState, useLayoutEffect, useContext } from "react";
 import { DataContext } from "./DataProvider";
 
+import numeral from "numeral";
+import { DateTime } from "luxon";
+
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import style from "./styles/Map.module.css";
@@ -51,17 +54,23 @@ export default function Map() {
           })
             .addTo(myMap)
             .bindPopup(
-              `Country: ${country.Country} <br /> Cases: ${
+              `Country: ${country.Country} <br /> Cases: ${numeral(
                 country.TotalConfirmed
-              } <br /> Deaths: ${country.TotalDeaths} <br /> Mortality: ${
+              ).format("0,0")} <br /> Deaths: ${numeral(
+                country.TotalDeaths
+              ).format("0,0")} <br /> Mortality: ${numeral(
                 chopNumbers(country.TotalDeaths / country.TotalConfirmed) * 100
-              }%  <br/> Total Recovered: ${
+              ).format("0,0.00")}%  <br/> Total Recovered: ${numeral(
                 country.TotalRecovered
-              } <br/> New Confirmed: ${
+              ).format("0,0")} <br/> New Confirmed: ${numeral(
                 country.NewConfirmed
-              } <br/> New Deaths: ${country.NewDeaths} <br/> New Recovered: ${
+              ).format("0,0")} <br/> New Deaths: ${numeral(
+                country.NewDeaths
+              ).format("0,0")} <br/> New Recovered: ${numeral(
                 country.NewRecovered
-              } <br/> Last Update: ${country.Date}`
+              ).format("0,0")} <br/> Last Update: ${DateTime.fromISO(
+                country.Date
+              ).toLocaleString(DateTime.DATETIME_MED)}`
             )
             .on("click", onClick)
             .openPopup();
@@ -72,17 +81,23 @@ export default function Map() {
           })
             .addTo(myMap)
             .bindPopup(
-              `Country: ${country.Country} <br /> Cases: ${
+              `Country: ${country.Country} <br /> Cases: ${numeral(
                 country.TotalConfirmed
-              } <br /> Deaths: ${country.TotalDeaths} <br /> Mortality: ${
+              ).format("0,0")} <br /> Deaths: ${numeral(
+                country.TotalDeaths
+              ).format("0,0")} <br /> Mortality: ${numeral(
                 chopNumbers(country.TotalDeaths / country.TotalConfirmed) * 100
-              }%  <br/> Total Recovered: ${
+              ).format("0,0.00")}%  <br/> Total Recovered: ${numeral(
                 country.TotalRecovered
-              } <br/> New Confirmed: ${
+              ).format("0,0")} <br/> New Confirmed: ${numeral(
                 country.NewConfirmed
-              } <br/> New Deaths: ${country.NewDeaths} <br/> New Recovered: ${
+              ).format("0,0")} <br/> New Deaths: ${numeral(
+                country.NewDeaths
+              ).format("0,0")} <br/> New Recovered: ${numeral(
                 country.NewRecovered
-              } <br/> Last Update: ${country.Date}`
+              ).format("0,0")} <br/> Last Update: ${DateTime.fromISO(
+                country.Date
+              ).toLocaleString(DateTime.DATETIME_MED)}`
             )
             .on("click", onClick);
         }
