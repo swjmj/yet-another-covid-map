@@ -4,7 +4,7 @@ import styles from "./styles/Header.module.css";
 export default function Header() {
   return (
     <>
-      <div className={styles.container}>World map of cases of covid. </div>
+      <div className={styles.container}>World Map - Covid19 Cases </div>
       <div className={styles.name}>
         Made by{" "}
         <a

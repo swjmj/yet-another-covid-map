@@ -70,7 +70,7 @@ export default function PopSideBar() {
         id="panel_button"
         ref={buttonRef}
       >
-        Map Info
+        ?
       </button>
 
       <div>{content && infoDiv}</div>

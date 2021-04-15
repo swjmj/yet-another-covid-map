@@ -1,6 +1,8 @@
 import React, { useContext } from "react";
 import { DataContext } from "./DataProvider";
 
+import numeral from "numeral";
+
 import {
   SortDeaths,
   SortMortality,
@@ -90,12 +92,19 @@ export default function Info() {
             onClick={() => markerClick(country.Country)}
           >
             <li>Country: {country.Country}</li>
-            <li>Total Confirmed: {country.TotalConfirmed}</li>
-            <li>Total Deaths: {country.TotalDeaths}</li>
-            <li>Total Recovered: {country.TotalRecovered}</li>
+            <li>
+              Total Confirmed: {numeral(country.TotalConfirmed).format("0,0")}
+            </li>
+            <li>Total Deaths: {numeral(country.TotalDeaths).format("0,0")}</li>
+            <li>
+              Total Recovered: {numeral(country.TotalRecovered).format("0,0")}
+            </li>
             <li>
               Mortality:
-              {chopNumbers(country.TotalDeaths / country.TotalConfirmed) * 100}%
+              {numeral(
+                chopNumbers(country.TotalDeaths / country.TotalConfirmed) * 100
+              ).format("0,0.00")}
+              %
             </li>
           </ul>
         ))}
