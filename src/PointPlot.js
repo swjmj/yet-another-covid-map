@@ -2,6 +2,8 @@ import React, { useContext } from "react";
 import { DataContext } from "./DataProvider";
 import style from "./styles/PointPlot.module.css";
 
+import LoadingScreen from "./LoadingScreen";
+
 import CanvasJSReact from "./lib/canvasjs.react";
 const CanvasJS = CanvasJSReact.CanvasJS;
 const CanvasJSChart = CanvasJSReact.CanvasJSChart;
@@ -11,10 +13,11 @@ export default function PointPlot() {
     DataContext
   );
 
-  if (loadingMex) return <h2>Loading...</h2>;
+  if (loadingMex) return <LoadingScreen />;
   if (errorMex) return <p>{JSON.stringify(errorMex, null, 2)}</p>;
 
   const options = {
+    // width: 1000,
     zoomEnabled: true,
     animationEnabled: true,
     title: {
