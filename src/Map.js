@@ -80,7 +80,7 @@ export default function Map() {
                 ).format("0,0")}</div> 
                 <div class="popupMap"> Last Update: ${DateTime.fromISO(
                   country.Date
-                ).toLocaleString(DateTime.DATETIME_MED)}</div> 
+                ).toLocaleString(DateTime.DATETIME_FULL)} </div> 
               </div>`
             )
             .on("click", onClick)
@@ -117,7 +117,7 @@ export default function Map() {
               ).format("0,0")}</div> 
               <div class="popupMap"> Last Update: ${DateTime.fromISO(
                 country.Date
-              ).toLocaleString(DateTime.DATETIME_MED)}</div> </div>`
+              ).toLocaleString(DateTime.DATETIME_FULL)}</div> </div>`
             )
             .on("click", onClick);
         }
